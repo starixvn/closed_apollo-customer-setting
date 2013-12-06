@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Others">
+    <Setting Key="Others_Acc_Customer_GetInfo" SpName="Age_Customer_GetInfo" DbName="repl-db" Plain="1"/>
+    <Setting Key="Others_Acc_Agent_GetInfo" SpName="Age_Customer_GetInfo" DbName="repl-db" Plain="1"/>
+  </Function>
+</Functions>

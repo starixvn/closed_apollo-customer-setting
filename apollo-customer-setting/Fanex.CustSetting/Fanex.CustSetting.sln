@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.CustSetting", "Fanex.CustSetting\Fanex.CustSetting.csproj", "{4E962BA8-7D6D-427E-8C30-C8EF81BF166F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.CustSetting.Sample", "Fanex.CustSetting.Sample\Fanex.CustSetting.Sample.csproj", "{8976C052-6AEC-432F-B502-359276087B96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E962BA8-7D6D-427E-8C30-C8EF81BF166F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E962BA8-7D6D-427E-8C30-C8EF81BF166F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E962BA8-7D6D-427E-8C30-C8EF81BF166F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E962BA8-7D6D-427E-8C30-C8EF81BF166F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8976C052-6AEC-432F-B502-359276087B96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8976C052-6AEC-432F-B502-359276087B96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8976C052-6AEC-432F-B502-359276087B96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8976C052-6AEC-432F-B502-359276087B96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

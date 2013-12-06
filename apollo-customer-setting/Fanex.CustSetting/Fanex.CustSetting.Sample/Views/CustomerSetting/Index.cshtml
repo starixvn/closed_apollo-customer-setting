@@ -1,0 +1,315 @@
+﻿@{
+    ViewBag.Title = "Customer Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Customer Setting Engine</h2>
+    <input type="checkbox" value="Simple Mode" id="cbSimpleMode" />
+    <label for="cbSimpleMode">Simple Mode</label>
+    <br />
+@*<a href="javascript:Popups.Confirm(0.3);">Confirm</a><br />*@ 
+<a href="javascript:selectCustEdit(4,3,0,471,'Super Edit Main ShareHolder',1);"> Click Super Edit Main ShareHolder</a>
+<br />
+<a href="javascript:selectCustEdit(2,2,471,472,'Agent K Edit Agent K + 1',1);">Click Agent K Edit Agent K + 1</a>
+<br />
+<a href="javascript:selectCustEdit(2,1,495,10722400,'Agent k edit Member',1);">Click Agent k edit member</a>
+<br />
+<a href="javascript:selectCustEdit(2,1,471,10722400,'Agent k edit non direct Member',2);">Click Agent k edit non direct member</a>
+<br />
+<a href="javascript:selectCustEdit(3,3,471,471,'MainShare Holder View Setting',3);">Click Agent View Setting</a>
+<br />
+<a href="javascript:selectCustEdit(2,2,472,472,'Agent View Setting',3);">Click Agent View Setting</a>
+<br />
+<input type="hidden" id="txtFormId" />
+<table id="tbCustInfo" style="display: none;">
+    <tr>
+        <td align="center" colspan="2">
+            <label id="lblInfo" style="font-weight: bold;">
+            </label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            CustId:
+        </td>
+        <td>
+            <input type="text" id="txtCustId" />
+            <input type="hidden" id="txtHCustId" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            TargetCustId:
+        </td>
+        <td>
+            <input type="text" id="txtTargetCustId" />
+            <input type="hidden" id="txtHTargetCustId" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input id="btnLoadData" type="button" value="Load Data" />
+        </td>
+        <td>
+            <input id="btnSave" type="button" value="Save All" onclick="SaveAll()" disabled="disabled" />
+        </td>
+    </tr>
+</table>
+<br />
+<script type="text/javascript">
+    var grid1 = null;
+    var bettingLimit1 = null;
+    var commissionSetting = null;
+    var getPtDataUrl = '@Url.Action("GetPositionTakingForUpdating", "CustomerSetting")';
+    var getBettingLimitDataUrl = '@Url.Action("GetBettingLimitForUpdating", "CustomerSetting")';
+    var getCommissionSettingDataUrl = '@Url.Action("GetAgentCommissionSetting", "CustomerSetting")';
+    var updatePtDataUrl = '@Url.Action("UpdatePositionTakingForUpdating", "CustomerSetting")';
+    var updateBettingLimitDataUrl = '@Url.Action("UpdateBettingLimitForUpdating", "CustomerSetting")';
+    var updateCommissionSettingDataUrl = '@Url.Action("UpdateAgentCommissionSetting", "CustomerSetting")';
+    var updateSetting = '@Url.Action("UpdateSetting", "CustomerSetting")';
+    var currentContextGlobal = null;
+    $("#btnLoadData").click(function () {
+        var success = 0;
+        var currentContext =
+        {
+            CustId: parseInt($("#txtCustId").val()),
+            TargetCustId: parseInt($("#txtTargetCustId").val()),
+            RoleId: parseInt($("#txtHCustId").val()),
+            TargetRoleId: parseInt($("#txtHTargetCustId").val()),
+            FormId: parseInt($("#txtFormId").val()),
+            ActorCustId: parseInt($("#txtCustId").val()),
+            IsSimpleMode: $("#cbSimpleMode").prop("checked")
+        };
+        currentContextGlobal = currentContext;
+        Fanex.CustSetting.CURRENT_CONTEXT = new Fanex.CustSetting.Context(currentContext);
+
+//        var settingContainer = document.getElementById('settingContainer');
+//        grid1 = new Fanex.CustSetting.PTGrid(Fanex.CloneObject(grid));
+//        var ptContainer = document.getElementById('ptContainer');
+//        ptContainer.innerHTML = "";
+//        grid1.Render(ptContainer);
+
+//        bettingLimit1 = new Fanex.CustSetting.BettingLimit(bettingLimits2.bettingLimitItems);
+//        var bettingLimitContainer = document.getElementById('bettingLimitContainer');
+//        bettingLimitContainer.innerHTML = "";
+//        bettingLimit1.Render(bettingLimitContainer);
+
+
+//        commissionSetting = new Fanex.CustSetting.CommissionSetting(commissionSettingData);
+//        var commissionSettingContainer = document.getElementById('commissionSettingContainer');
+//        commissionSettingContainer.innerHTML = "";
+//        commissionSetting.Render(commissionSettingContainer);
+
+        //// Load PtSetting
+                $.ajax({
+                    type: "POST",
+                    url: getPtDataUrl,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(currentContext),
+                    success: function (result) {
+                        var settingContainer = document.getElementById('settingContainer');
+                        grid1 = new Fanex.CustSetting.PTGrid(result);
+                        var ptContainer = document.getElementById('ptContainer');
+                        ptContainer.innerHTML = "";
+                        grid1.Render(ptContainer);
+
+                        success++;
+                        if (success == 3) {
+                            alert("Load Successfully!");
+                        }
+                    }
+                });
+        //        //// Load Betting Limit
+                $.ajax({
+                    type: "POST",
+                    url: getBettingLimitDataUrl,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(currentContext),
+                    success: function (result) {
+                        bettingLimit1 = new Fanex.CustSetting.BettingLimit(result);
+                        var bettingLimitContainer = document.getElementById('bettingLimitContainer');
+                        bettingLimitContainer.innerHTML = "";
+                        bettingLimit1.Render(bettingLimitContainer);
+
+                        success++;
+                        if (success == 3) {
+                            alert("Load Successfully!");
+                        }
+                    }
+                });
+
+                //// Load Commission Setting
+                $.ajax({
+                    type: "POST",
+                    url: getCommissionSettingDataUrl,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(currentContext),
+                    success: function (result) {
+                        commissionSetting = new Fanex.CustSetting.CommissionSetting(result);
+                        var commissionSettingContainer = document.getElementById('commissionSettingContainer');
+                        commissionSettingContainer.innerHTML = "";
+                        commissionSetting.Render(commissionSettingContainer);
+
+                        success++;
+                        if (success == 3) {
+                            alert("Load Successfully!");
+                        }
+                    }
+                });
+
+        $("#btnSave").removeAttr("disabled");
+    });
+
+
+    function selectCustEdit(roleId, targetRoleId, custId, targetCustId, info,formId) { // x - element, y - tag
+        $("#tbCustInfo").show();
+        $("#txtCustId").val(custId);
+        $("#txtTargetCustId").val(targetCustId);
+        $("#txtHCustId").val(roleId);
+        $("#txtHTargetCustId").val(targetRoleId);
+        $("#btnSave").attr("disabled", "disabled");
+        $("#lblInfo").text(info);
+        $("#txtFormId").val(formId);
+        //        Validators.show(document.getElementById('btnSave'), 'This is demo for tooltip message, this is very long message with custom style');
+    };
+
+    // unblock when ajax activity stops 
+    $(document).ajaxStop($.unblockUI);
+
+    function SaveAll() {
+
+        var betSettingValidate = bettingLimit1.Validate();
+        var ptValidate = grid1.Validate();
+        var commissionValidate = commissionSetting.Validate();
+        if ((betSettingValidate && ptValidate && commissionValidate) == false) {
+            alert("Invalid range");
+            return;
+        }
+        try { $.blockUI(); } catch (e) { };
+        var commissionValue = commissionSetting.Save();
+        var betSettingValue = bettingLimit1.Save();
+        var ptSettingValue = grid1.Save();
+        var success = 0;
+//                //// Update Bet Limit
+//                $.ajax({
+//                    type: "POST",
+//                    url: updateBettingLimitDataUrl,
+//                    contentType: "application/json; charset=utf-8",
+//                    dataType: "json",
+//                    data: JSON.stringify({
+//                        settingContext: currentContextGlobal,
+//                        bettingLimits: betSettingValue
+//                    }),
+//                    success: function (result) {
+//                        if (result.ErrCode == 0 || result.ErrCode == 1500) {
+//                            success++;
+//                            if (success == 3) {
+//                                $.unblockUI(); 
+//                            }
+//                        }
+//                        else {
+//                            if (console.log) {
+//                                console.log(result.ErrMsg);
+//                            }
+//                            $.unblockUI(); 
+//                        }
+//                    }
+//                });
+
+//                //// Update Commission Setting
+//                $.ajax({
+//                    type: "POST",
+//                    url: updateCommissionSettingDataUrl,
+//                    contentType: "application/json; charset=utf-8",
+//                    dataType: "json",
+//                    data: JSON.stringify({
+//                        settingContext: currentContextGlobal,
+//                        commissionSetting: commissionValue
+//                    }),
+//                    success: function (result) {
+//                        if (result.ErrCode == 0 || result.ErrCode == 1500) {
+//                            success++;
+//                            if (success == 3) {
+//                                $.unblockUI(); 
+//                            }
+//                        }
+//                        else {
+//                            if (console.log) {
+//                                console.log(result.ErrMsg);
+//                            }
+//                            $.unblockUI(); 
+//                        }
+//                    }
+//                });
+
+//        //        //// Update PT Setting
+//                $.ajax({
+//                    type: "POST",
+//                    url: updatePtDataUrl,
+//                    contentType: "application/json; charset=utf-8",
+//                    dataType: "json",
+//                    data: JSON.stringify({
+//                        settingContext: currentContextGlobal,
+//                        ptSetting: ptSettingValue
+//                    }),
+//                    success: function (result) {
+//                        if (result.ErrCode == 0 || result.ErrCode == 1500) {
+//                            success++;
+//                            if (success == 3) {
+//                                $.unblockUI(); 
+//                            }
+//                        }
+//                        else {
+//                            if (console.log) {
+//                                console.log(result.ErrMsg);
+//                            }
+//                            $.unblockUI(); 
+//                        }
+//                    }
+//                });
+
+                        $.ajax({
+                            type: "POST",
+                            url: updateSetting,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            data: JSON.stringify({
+                                settingContext: currentContextGlobal,
+                                ptSetting: ptSettingValue,
+                                commissionSetting: commissionValue,
+                                bettingLimits: betSettingValue
+                            }),
+                            success: function (result) {
+                                if (result.ErrCode == 0 || result.ErrCode == 1500) {
+                                    success++;
+                                    if (success == 3) {
+                                        $.unblockUI(); 
+                                    }
+                                }
+                                else {
+                                    if (console.log) {
+                                        console.log(result.ErrMsg);
+                                    }
+                                    $.unblockUI(); 
+                                }
+                            }
+                        });
+    }
+
+</script>
+<br />
+<div>
+    <div id="settingContainer" style="width: 915px">
+        <div id="commissionSettingContainer">
+        </div>
+        <br />
+        <div id="bettingLimitContainer">
+        </div>
+        <br />
+        <div id="ptContainer">
+        </div>
+    </div>
+</div>

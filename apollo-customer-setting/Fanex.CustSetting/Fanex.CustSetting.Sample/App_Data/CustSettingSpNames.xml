@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="AgentSetting">
+    <Setting Key="AgentSetting_Age_Agent_GetDiscountForUpdate" SpName="Age_Agent_GetDiscountForUpdate" DbName="repl-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="AgentSetting_Age_Agent_GetBetLimitForUpdate" SpName="Age_Agent_GetBetLimitForUpdate" DbName="repl-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="AgentSetting_Age_Agent_GetPositionTakingForUpdate" SpName="Age_Agent_GetPositionTakingForUpdate" DbName="repl-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="AgentSetting_Age_Agent_UpdateBetLimit" SpName="Age_Agent_UpdateBetLimit" DbName="cust-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="AgentSetting_Age_Agent_UpdateDiscount" SpName="Age_Agent_UpdateDiscount" DbName="cust-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="AgentSetting_Age_Agent_UpdatePositionTaking" SpName="Age_Agent_UpdatePositionTaking" DbName="cust-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="AgentSetting_Age_Agent_UpdateSetting" SpName="Age_Agent_UpdateSetting" DbName="cust-db" Plain="1"  TimeOut="600"/>
+  </Function>
+  <Function Name="PlayerSetting">
+    <Setting Key="PlayerSetting_Age_Customer_GetDiscountForUpdate" SpName="Age_Customer_GetDiscountForUpdate" DbName="repl-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="PlayerSetting_Age_Customer_GetBetLimitForUpdate" SpName="Age_Customer_GetBetLimitForUpdate" DbName="repl-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="PlayerSetting_Age_Customer_GetPositionTakingForUpdate" SpName="Age_Customer_GetPositionTakingForUpdate" DbName="repl-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="PlayerSetting_Age_Customer_UpdateBetLimit" SpName="Age_Customer_UpdateBetLimit" DbName="cust-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="PlayerSetting_Age_Customer_UpdateDiscount" SpName="Age_Customer_UpdateDiscount" DbName="cust-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="PlayerSetting_Age_Customer_UpdatePositionTaking" SpName="Age_Customer_UpdatePositionTaking" DbName="cust-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="PlayerSetting_Age_Customer_UpdateSetting" SpName="Age_Customer_UpdateSetting" DbName="cust-db" Plain="1"  TimeOut="600"/>
+    <Setting Key="PlayerSetting_Age_Customer_GetInfo" SpName="Age_Customer_GetInfo" DbName="repl-db" Plain="1"  TimeOut="600"/>
+    
+  </Function>
+</Functions>
